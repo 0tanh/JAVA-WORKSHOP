@@ -1,0 +1,11 @@
+# Ignore the teacher grading server and related answer keys
+teacher-server/
+
+# Ignore Python virtual environments
+venv/
+.venv/
+__pycache__/
+
+# Ignore Maven/Java target builds
+student-repo/target/
+*.class
