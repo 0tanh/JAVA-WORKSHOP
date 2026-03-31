@@ -1,6 +1,7 @@
 package oop.workshop.unit1_classes;
 
 public class Car {
+   private String brand;
     // TODO 1: Create a private String variable named 'brand'
     // TODO 2: Create a private int variable named 'year'
     
