@@ -43,8 +43,13 @@ def handle_webhook():
             print(e.stderr.decode('utf-8'))
             return {"status": "error", "message": "Failed to clone repo"}, 500
             
+        # Check if project is nested in student-repo
+        project_dir = temp_dir
+        if os.path.exists(os.path.join(temp_dir, 'student-repo')):
+            project_dir = os.path.join(temp_dir, 'student-repo')
+            
         # Copy hidden tests into the student's repo
-        student_test_dir = os.path.join(temp_dir, 'src', 'test')
+        student_test_dir = os.path.join(project_dir, 'src', 'test')
         if not os.path.exists(student_test_dir):
             os.makedirs(student_test_dir)
             
@@ -56,7 +61,7 @@ def handle_webhook():
         # Run maven tests
         print("Running tests with Maven...")
         try:
-            result = subprocess.run(["mvn", "test"], cwd=temp_dir, capture_output=True, text=True)
+            result = subprocess.run(["mvn", "test"], cwd=project_dir, capture_output=True, text=True)
             
             # Print output for the teacher to see
             print("--- MAVEN TEST RESULTS ---")
